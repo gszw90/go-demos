@@ -329,3 +329,44 @@ func Test_lengthOfLastWord(t *testing.T) {
 		})
 	}
 }
+
+func TestMinimumDeletions(t *testing.T) {
+	tests := []struct {
+		name     string
+		word     string
+		k        int
+		expected int
+	}{
+		{
+			name:     "Single character string",
+			word:     "a",
+			k:        1,
+			expected: 0,
+		},
+		{
+			name:     "example 1",
+			word:     "aabcaba",
+			k:        0,
+			expected: 3,
+		},
+		{
+			name:     "example 2",
+			word:     "dabdcbdcdcd",
+			k:        2,
+			expected: 2,
+		},
+		{
+			name:     "example 3",
+			word:     "aaabaaa",
+			k:        2,
+			expected: 1,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := minimumDeletions(tt.word, tt.k)
+			assert.Equal(t, tt.expected, result)
+		})
+	}
+}
