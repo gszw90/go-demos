@@ -1,6 +1,8 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 
 	"demos/gin_demo/middleware"
@@ -13,6 +15,11 @@ func main() {
 		middleware.Params,
 	)
 	r.POST("/raw", RawHandler)
+	r.GET("/", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, gin.H{
+			"msg": "ok",
+		})
+	})
 
 	r.Run(":8080")
 }
