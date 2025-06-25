@@ -59,6 +59,83 @@ func TestAddTwoNumbers(t *testing.T) {
 	}
 }
 
+func TestRotateRight(t *testing.T) {
+	tests := []struct {
+		name     string
+		original *ListNode
+		k        int
+		expected *ListNode
+	}{
+		{
+			name: "nil",
+			original: &ListNode{
+				Val: 1,
+				Next: &ListNode{
+					Val: 2,
+					Next: &ListNode{
+						Val: 3,
+						Next: &ListNode{
+							Val: 4,
+							Next: &ListNode{
+								Val:  5,
+								Next: nil,
+							},
+						},
+					},
+				},
+			},
+			k: 2,
+			expected: &ListNode{
+				Val: 4,
+				Next: &ListNode{
+					Val: 5,
+					Next: &ListNode{
+						Val: 1,
+						Next: &ListNode{
+							Val: 2,
+							Next: &ListNode{
+								Val:  3,
+								Next: nil,
+							},
+						},
+					},
+				},
+			},
+		},
+		{
+			name: "example 1",
+			original: &ListNode{
+				Val: 0,
+				Next: &ListNode{
+					Val: 1,
+					Next: &ListNode{
+						Val:  2,
+						Next: nil,
+					},
+				},
+			},
+			k: 4,
+			expected: &ListNode{
+				Val: 2,
+				Next: &ListNode{
+					Val: 0,
+					Next: &ListNode{
+						Val:  1,
+						Next: nil,
+					},
+				},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := rotateRight(tt.original, tt.k)
+			assert.True(t, compareLists(tt.expected, result))
+		})
+	}
+}
+
 // 添加自定义链表比较函数
 func compareLists(l1, l2 *ListNode) bool {
 	for l1 != nil && l2 != nil {
